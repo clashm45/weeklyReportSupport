@@ -2,10 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui">
 
 <ui:composition template="/template/layout.xhtml">
 	<ui:define name="content">
+	
+	<h:form>
+	<h2>週報を書きましょう</h2>
+	
+	<b:commandButton action="#{editorController.save}" ajax="false" value="save"/>
+	
+	<b:panelGrid colSpans="2,10">
+		<p:outputLabel for="title" value="タイトル :"/>
+		<p:inputText id="title" value="#{editorController.report.title}"
+			placeholder="タイトル" size="80" required="true" />
+		<p:outputLabel for="from" value="期間(From) :" />
+		<p:calendar id="from" value="#{editorController.report.from}" pattern="yyyy/MM/dd" mask="true" />
+		<p:outputLabel for="to" value="期間(To) :" />
+		<p:calendar id="to" value="#{editorController.report.to}" pattern="yyyy/MM/dd" mask="true" />
+	</b:panelGrid>
+	
+	<p:separator/>
+	
+	<p:inputTextarea rows="10" cols="120" value="#{editorController.report.content}" placeholder="先週はなにがありましたか...?" />
+	
+	<p:separator/>
+	
+	<h:outputText value="Preview" />
+	
+	</h:form>
 	</ui:define>
 </ui:composition>
 </html>

@@ -18,7 +18,7 @@
 
 <b:container>
 	<div id="header">
-	   	<b:navBar brand="Brand" brandHref="#" inverse="true" fixed="top">
+	   	<b:navBar brand="Brand" brandHref="#{request.contextPath}/" inverse="true" fixed="top">
 		    <b:navbarLinks>
 		        <b:navLink value="Home" href="#"></b:navLink>
 		        <b:navLink value="Link" href="#"></b:navLink>
@@ -28,14 +28,16 @@
 	</div>
 	
 	<div id="content">
+	  <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 	  <ui:insert name="content">
 	    	<!-- Content area.  See comments below this line in the source. -->
 	  </ui:insert>
 	</div>
 	
-	<div id="footer">
+<!-- 	<div id="footer">
 		<b:navBar brand="footer" brandHref="#" fixed="bottom"/>
 	</div>
+ -->
 </b:container>
 </h:body>
 
