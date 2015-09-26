@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+
+#content {
+	/* fixed header and fotterの領域 */
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
