@@ -24,6 +24,7 @@ dependencies {
         'javax:javaee-api:7.0',
         'org.primefaces:primefaces:5.2',
         'org.primefaces.themes:all-themes:1.0.10',
+        'net.bootsfaces:bootsfaces:0.7.0',
 
         'org.slf4j:slf4j-api:1.7.7',
         'org.slf4j:slf4j-log4j12:1.7.12'
