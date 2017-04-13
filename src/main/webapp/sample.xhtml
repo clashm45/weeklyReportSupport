@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/layout.xhtml">
+	<ui:define name="content">
+	
+		<h:form id="form1">
+			<h1>お試し</h1>
+			<h:outputText value="bool = #{sampleController.bool}" /><br/>
+			<h:outputText value="str  = #{sampleController.str}" /><br/>
+			<h:outputText value="next = #{sampleController.next}" /><br/>
+			<h:outputText value="console = #{sampleController.console}" /><br/>
+			<br/>
+			<p:selectBooleanCheckbox value="#{sampleController.bool}">
+				<p:ajax listener="#{sampleController.changeBool}" update="@form">
+					<!-- これではstrはメソッドで使えない -->
+					<f:setPropertyActionListener target="#{sampleController.str}" value="value_here"/>
+				</p:ajax>
+			</p:selectBooleanCheckbox>
+			<br/>
+			<p:commandButton value="submit" update="@form" action="#{sampleController.submit}">
+				<!-- これなら当然strはbeanに設定済みで、メソッドで使える -->
+				<f:setPropertyActionListener target="#{sampleController.str}" value="value_here"/>
+			</p:commandButton>
+			<br/>
+			<br/>
+			<p:inputText id="next" value="#{sampleController.next}"/>
+			<p:commandButton value="submit" update="@form" process="next" action="#{sampleController.submit}"/>
+			<br/>
+			<br/>
+			<p:selectOneMenu value="#{sampleController.console}">
+				<p:ajax listener="#{sampleController.oneMenu}" update="@form"/>
+				<f:selectItem itemLabel="Select One" itemValue="" />
+	            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One,#{sampleController.next}" />
+	            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+	            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+			</p:selectOneMenu>
+			
+			<br/>
+			<br/>
+			
+			<p:panelGrid id="grid">
+				<ui:repeat var="tmp" value="#{sampleController.temples}" varStatus="vs">
+					<p:row>
+						<p:column>
+							<p:selectOneMenu value="#{tmp.console}">
+								<p:ajax listener="#{sampleController.oneMenu}" update="form1:grid" />
+								<f:selectItem itemLabel="Select One" itemValue="" />
+					            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One,#{vs.index}" />
+					            <f:selectItem itemLabel="PS4" itemValue="PS4,#{vs.index}" />
+					            <f:selectItem itemLabel="Wii U" itemValue="Wii U,#{vs.index}" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<h:outputText value="#{tmp.name}"/>
+						</p:column>
+						<p:column>
+							<h:outputText value="#{tmp.oldName}"/>
+						</p:column>
+						<p:column>
+							<h:outputText value="#{tmp.console}"/>
+						</p:column>
+					</p:row>
+				</ui:repeat>
+				
+			
+			</p:panelGrid>
+			
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
